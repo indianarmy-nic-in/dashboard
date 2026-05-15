@@ -42,6 +42,19 @@ img {
   -webkit-user-drag: none;
   user-drag: none;
 }
+
+/* --- SIRF YEH ADD KIYA GAYA HAI CONTENT ROKNE KE LIYE --- */
+.top-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: #f4f6f9; /* Background color match kiya gaya hai */
+    z-index: 101;
+}
+/* ------------------------------------------------------- */
+
 #flipCard { perspective: 1200px; }
 #flipInner {
   transform-style: preserve-3d;
@@ -61,7 +74,7 @@ img {
 .max-h-0 { max-height: 0; overflow: hidden; }
 .transition-max-height { transition: max-height 0.4s ease; }
 
-/* 3D इफ़ेक्ट और पूरी तरह लॉक हेडर - top 20px kiya gaya hai */
+/* 3D इफ़ेक्ट और पूरी तरह लॉक हेडर - top 50px hi rakha gaya hai */
 .perfect-fixed-header {
   position: fixed;
   top: 50px;
@@ -95,6 +108,9 @@ img {
   style="background-image: url('https://media.istockphoto.com/id/1297933144/vector/vector-illustration-of-indian-tricolor-flag-background.jpg?s=612x612&w=0&k=20&c=tCd-ZdLMNHw_KAMZTX9zStqEDdWzXlS6FYrvjrZIswk=')"
   oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
 
+<!-- CONTENT BLOCKER: Yeh div scroll hone wale content ko 50px gap mein nahi dikhne dega -->
+<div class="top-mask"></div>
+
 <!-- 3D इफ़ेक्ट के साथ पूरी तरह से लॉक्ड TOP हेडर -->
 <div class="perfect-fixed-header pb-4 pt-4 px-4 sm:px-6 lg:px-8">
   <div class="max-w-6xl mx-auto flex justify-between items-center select-none">
@@ -106,7 +122,7 @@ img {
   </div>
 </div>
 
-<!-- मुख्य सामग्री अनुभाग - pt-32 kiya gaya hai content ko neeche karne ke liye -->
+<!-- मुख्य सामग्री अनुभाग -->
 <section id="profileScreen" class="min-h-screen bg-white pt-32">
   <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8 select-none">
     
@@ -120,7 +136,7 @@ img {
       <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCHloBHTkY8lAYNgE2CFaQOfVCH5jD9S3Y5EdnNKmLM3-n0Uv6wphxOW8ZmNw_frMef_XJ2RhyaELuYiZ7VqMQIhFJU6PdSsHUHIBWbklZZo_Qr5IX98Dk3BujZljBTAtO7PYS-5TaF8Ju36QeUfBQB-52lBDnRRNMtsTBr8gz8l4WetEL-Q9HUj6EwlO4/s523/Untitled%20design.jpeg" alt="Officer Photo" class="w-48 h-64 object-cover border-4 border-gray-200 rounded-xl shadow-md" draggable="false" />
     </div>
     
-    <!-- टेबल अनुभाग (सटीक छोटे चित्रों के साथ) -->
+    <!-- टेबल अनुभाग -->
     <div class="overflow-x-auto mb-10" data-aos="fade-up">
       <table class="w-full border-collapse min-w-[320px] md:min-w-auto" oncopy="return false" oncut="return false" onpaste="return false">
         <tbody class="divide-y divide-gray-200">
@@ -192,7 +208,7 @@ img {
       </table>
     </div>
     
-    <!-- हमेशा एक लाइन में रहने वाले एनिमेटेड बटन -->
+    <!-- एनिमेटेड बटन -->
     <div class="flex flex-row justify-between items-center gap-2 max-w-4xl mx-auto mb-10 px-1" data-aos="fade-up">
       <a href="#" class="animate-btn flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" onclick="handleCardClick(event, 'defence')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> DEFENCE ID</a>
       <a href="#" class="animate-btn flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" onclick="handleCardClick(event, 'csd')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i> CSD CARD</a>
@@ -358,7 +374,7 @@ img {
 </section>
 
 <!-- Flip Card Modal -->
-<div id="flipCardModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
+<div id="flipCardModal" class="fixed inset-0 z-[120] flex items-center justify-center hidden bg-black bg-opacity-50">
   <div class="bg-transparent flex flex-col items-center max-w-xs mx-4 sm:max-w-md" oncontextmenu="return false;">
     <div id="flipCard" class="w-72 h-44 relative mb-6 rounded-xl">
       <div id="flipInner" class="relative w-full h-full">
@@ -438,7 +454,7 @@ function handleCardClick(e, type) {
 function showLoadingAndFlipCard(type) {
   let loadingDiv = document.createElement("div");
   loadingDiv.id = "cardLoadingDiv";
-  loadingDiv.className = "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30";
+  loadingDiv.className = "fixed inset-0 z-[200] flex items-center justify-center bg-black bg-opacity-30";
   loadingDiv.innerHTML = `
     <div class="bg-white rounded-2xl px-8 py-6 text-xl font-bold text-blue-700 flex flex-col items-center select-none">
       <svg class="animate-spin h-8 w-8 mb-3 text-blue-800" fill="none" viewBox="0 0 24 24" aria-hidden="true">
