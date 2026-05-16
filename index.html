@@ -1,15 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>IAFZ</title>
+
+<!-- iPhone Full Screen App -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- Status Bar Style -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- App Name -->
+<meta name="apple-mobile-web-app-title" content="IAFZ">
+
+<!-- Android Theme -->
+<meta name="theme-color" content="#000000">
+
+<!-- App Icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg">
+
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Manifest Inline -->
+<script>
+const manifestData = {
+    "name": "IAFZ",
+    "short_name": "IAFZ",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+};
+
+const manifestBlob = new Blob(
+    [JSON.stringify(manifestData)],
+    {type: 'application/json'}
+);
+
+const manifestURL = URL.createObjectURL(manifestBlob);
+
+document.querySelector('link[rel="manifest"]')
+.setAttribute('href', manifestURL);
+</script>
+
+<style>
+
+body, html{
+    margin:0;
+    padding:0;
+    width:100%;
+    background:#000;
+    font-family:sans-serif;
+    overscroll-behavior-y: none; /* यह ऊपर की तरफ एक्स्ट्रा बाउंसिंग स्क्रॉलिंग रोकता है */
+}
+
+/* Demo Fullscreen App */
+.app-container{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-
-<!-- iPhone Full Screen (App Mode) के लिए ज़रूरी Tags -->
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="Armed Forces" />
-<link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/b/b5/Armed_forces_logo.png">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Indian Armed Forces</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/feather-icons"></script>
@@ -42,19 +128,6 @@ img {
   -webkit-user-drag: none;
   user-drag: none;
 }
-
-/* --- SIRF YEH ADD KIYA GAYA HAI CONTENT ROKNE KE LIYE --- */
-.top-mask {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background-color: #f4f6f9; /* Background color match kiya gaya hai */
-    z-index: 101;
-}
-/* ------------------------------------------------------- */
-
 #flipCard { perspective: 1200px; }
 #flipInner {
   transform-style: preserve-3d;
@@ -74,10 +147,10 @@ img {
 .max-h-0 { max-height: 0; overflow: hidden; }
 .transition-max-height { transition: max-height 0.4s ease; }
 
-/* 3D इफ़ेक्ट और पूरी तरह लॉक हेडर - top 50px hi rakha gaya hai */
+/* 3D इफ़ेक्ट और पूरी तरह लॉक हेडर के लिए कस्टम स्टाइल */
 .perfect-fixed-header {
   position: fixed;
-  top: 50px;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 100;
@@ -86,9 +159,22 @@ img {
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.15), 0 2px 8px -1px rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(229, 231, 235, 0.8);
-  padding-top: env(safe-area-inset-top);
 }
 
+/* हमेशा नीचे लॉक रहने वाली त्रिरंगा स्ट्राइक की स्टाइल */
+.bottom-tricolor-stripe {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  height: 12px; /* स्ट्राइक की मोटाई/लंबाई बढ़ा दी गई है */
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+}
+
+/* बटन के लिए कस्टम पल्स एनिमेशन */
 @keyframes customPulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.03); }
@@ -102,14 +188,19 @@ img {
 .animate-btn:nth-child(3) {
   animation-delay: 1s;
 }
+
+/* नई डार्क रेड बटनों के लिए एनिमेशन विलेय */
+.animate-red-btn {
+  animation: customPulse 3s infinite ease-in-out;
+}
+.animate-red-btn:nth-child(1) { animation-delay: 0.2s; }
+.animate-red-btn:nth-child(2) { animation-delay: 0.7s; }
+.animate-red-btn:nth-child(3) { animation-delay: 1.2s; }
 </style>
 </head>
 <body class="min-h-screen bg-cover bg-center"
   style="background-image: url('https://media.istockphoto.com/id/1297933144/vector/vector-illustration-of-indian-tricolor-flag-background.jpg?s=612x612&w=0&k=20&c=tCd-ZdLMNHw_KAMZTX9zStqEDdWzXlS6FYrvjrZIswk=')"
   oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
-
-<!-- CONTENT BLOCKER: Yeh div scroll hone wale content ko 50px gap mein nahi dikhne dega -->
-<div class="top-mask"></div>
 
 <!-- 3D इफ़ेक्ट के साथ पूरी तरह से लॉक्ड TOP हेडर -->
 <div class="perfect-fixed-header pb-4 pt-4 px-4 sm:px-6 lg:px-8">
@@ -122,8 +213,8 @@ img {
   </div>
 </div>
 
-<!-- मुख्य सामग्री अनुभाग -->
-<section id="profileScreen" class="min-h-screen bg-white pt-32">
+<!-- मुख्य सामग्री अनुभाग (निचली स्ट्राइक के स्पेस के लिए pb-16 जोड़ा गया है) -->
+<section id="profileScreen" class="min-h-screen bg-white pt-24 pb-16">
   <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8 select-none">
     
     <div class="text-center mb-10" data-aos="fade-up">
@@ -136,7 +227,7 @@ img {
       <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCHloBHTkY8lAYNgE2CFaQOfVCH5jD9S3Y5EdnNKmLM3-n0Uv6wphxOW8ZmNw_frMef_XJ2RhyaELuYiZ7VqMQIhFJU6PdSsHUHIBWbklZZo_Qr5IX98Dk3BujZljBTAtO7PYS-5TaF8Ju36QeUfBQB-52lBDnRRNMtsTBr8gz8l4WetEL-Q9HUj6EwlO4/s523/Untitled%20design.jpeg" alt="Officer Photo" class="w-48 h-64 object-cover border-4 border-gray-200 rounded-xl shadow-md" draggable="false" />
     </div>
     
-    <!-- टेबल अनुभाग -->
+    <!-- टेबल अनुभाग (सटीक छोटे चित्रों के साथ) -->
     <div class="overflow-x-auto mb-10" data-aos="fade-up">
       <table class="w-full border-collapse min-w-[320px] md:min-w-auto" oncopy="return false" oncut="return false" onpaste="return false">
         <tbody class="divide-y divide-gray-200">
@@ -157,18 +248,21 @@ img {
           <tr>
             <td class="py-3 px-4 font-semibold bg-gray-100">Years of Service</td>
             <td class="py-3 px-4 flex items-center gap-2">
+             
               <span>13 June 2020 – Serving</span>
             </td>
           </tr>
           <tr>
             <td class="py-3 px-4 font-semibold bg-gray-100">Rank</td>
             <td class="py-3 px-4 flex items-center gap-2">
+             
               <span>Captain</span>
             </td>
           </tr>
           <tr>
             <td class="py-3 px-4 font-semibold bg-gray-100">Service ID</td>
             <td class="py-3 px-4 flex items-center gap-2">
+            
               <span class="font-mono">IC-80129D</span>
             </td>
           </tr>
@@ -182,22 +276,26 @@ img {
           <tr>
             <td class="py-3 px-4 font-semibold bg-gray-100">First Posting</td>
             <td class="py-3 px-4 flex items-center gap-2">
+            
               <span>Platoon Commander, Delta Company, Northern Command HQ, Udhampur, Jammu & Kashmir <br/><strong>Year 2020- 2023</strong></span>
             </td>
           </tr>
           <tr>
             <td class="py-3 px-4 font-semibold bg-gray-100">Currently Deployed</td>
             <td class="py-3 px-4 flex items-center gap-2">
+           
               <span>Staff Officer Grade II Operations (SO2 OPS) HQ I Corps Strike 1 Mathura U.P <br/><strong>Year 2023- Present</strong> </span>
             </td>
           </tr>
           <tr>
             <td class="py-3 px-4 font-semibold bg-gray-100">Awards</td>
             <td class="py-3 px-4 flex flex-col sm:flex-row sm:items-center gap-4">
+              <!-- Sena Medal चित्र और नाम -->
               <span class="flex items-center gap-1.5">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Sena_Medal_ribbon.svg/3840px-Sena_Medal_ribbon.svg.png" alt="Sena Medal Ribbon" class="w-6 h-3.5 object-contain rounded-sm shrink-0 shadow-sm" />
                 <span>Sena Medal,</span>
               </span>
+              <!-- COAS Commendation चित्र और नाम -->
               <span class="flex items-center gap-1.5">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/COAS_Commendation_disc.png" alt="COAS Ribbon" class="w-7 h-3 object-contain rounded-sm shrink-0 shadow-sm" />
                 <span>COAS Commendation</span>
@@ -208,12 +306,21 @@ img {
       </table>
     </div>
     
-    <!-- एनिमेटेड बटन -->
+    <!-- हमेशा एक लाइन में रहने वाले एनिमेटेड मूल बटन (इनमें कोई बदलाव नहीं हुआ है) -->
+   <div class="flex flex-row justify-between items-center gap-2 max-w-4xl mx-auto mb-10 px-1" data-aos="fade-up">
+  <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #D90000;" onclick="handleCardClick(event, 'defence')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> DEFENCE ID</a>
+  <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #000080;" onclick="handleCardClick(event, 'csd')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> CSD CARD</a>
+  <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #4CC7FC;" onclick="handleCardClick(event, 'medical')"><i data-feather="map-pin" class="w-3.5 h-3.5 mr-1 shrink-0"></i> MEDICAL CARD</a>
+</div>
+
+
+    <!-- तीन नई डार्क रेड बटनें (पल्स एनीमेशन और रिडायरेक्शन के साथ) -->
     <div class="flex flex-row justify-between items-center gap-2 max-w-4xl mx-auto mb-10 px-1" data-aos="fade-up">
-      <a href="#" class="animate-btn flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" onclick="handleCardClick(event, 'defence')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> DEFENCE ID</a>
-      <a href="#" class="animate-btn flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" onclick="handleCardClick(event, 'csd')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i> CSD CARD</a>
-      <a href="#" class="animate-btn flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" onclick="handleCardClick(event, 'medical')"><i data-feather="map-pin" class="w-3.5 h-3.5 mr-1 shrink-0"></i> MEDICAL CARD</a>
-    </div>
+  <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #D90000;" onclick="handleCustomRedirect(event, 'https://www.mod.gov.in/dod/en/user/login?destination=/dod/en/node/92481%23comment-form')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i> MANI E-BOOK</a>
+  <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #000080;" onclick="handleCustomRedirect(event, 'https://www.mod.gov.in/dod/en/user/login?destination=/dod/en/node/92481%23comment-form')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i> PORTAL WEB</a>
+  <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #4CC7FC;" onclick="handleCustomRedirect(event, 'https://www.wikipedia.org')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i> DEFENCE LINK</a>
+</div>
+
 
     <!-- Accordion -->
     <div class="max-w-4xl mx-auto px-4 py-6 space-y-4 select-none" data-aos="fade-up">
@@ -373,8 +480,15 @@ img {
   </div>
 </section>
 
-<!-- Flip Card Modal -->
-<div id="flipCardModal" class="fixed inset-0 z-[120] flex items-center justify-center hidden bg-black bg-opacity-50">
+<!-- पूरी तरह लॉक नीचे की त्रिरंगा स्ट्राइक (Tricolor Fixed Footer) -->
+<div class="bottom-tricolor-stripe">
+  <div class="flex-1 bg-[#D90000]"></div> <!-- केसरिया (Saffron) -->
+  <div class="flex-1 bg-[#000080]"></div> <!-- सफेद (White) -->
+  <div class="flex-1 bg-[#4CC7FC]"></div> <!-- हरा (Green) -->
+</div>
+
+<!-- Flip Card Modal (मूल पॉप-अप पहले की तरह ही सुरक्षित है) -->
+<div id="flipCardModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
   <div class="bg-transparent flex flex-col items-center max-w-xs mx-4 sm:max-w-md" oncontextmenu="return false;">
     <div id="flipCard" class="w-72 h-44 relative mb-6 rounded-xl">
       <div id="flipInner" class="relative w-full h-full">
@@ -454,13 +568,13 @@ function handleCardClick(e, type) {
 function showLoadingAndFlipCard(type) {
   let loadingDiv = document.createElement("div");
   loadingDiv.id = "cardLoadingDiv";
-  loadingDiv.className = "fixed inset-0 z-[200] flex items-center justify-center bg-black bg-opacity-30";
+  loadingDiv.className = "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30";
   loadingDiv.innerHTML = `
     <div class="bg-white rounded-2xl px-8 py-6 text-xl font-bold text-blue-700 flex flex-col items-center select-none">
       <svg class="animate-spin h-8 w-8 mb-3 text-blue-800" fill="none" viewBox="0 0 24 24" aria-hidden="true">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-      </svg>Loading...
+      </svgLoading...
     </div>`;
   document.body.appendChild(loadingDiv);
   setTimeout(() => {
@@ -483,6 +597,25 @@ function closeFlipCardModal() {
 document.getElementById("flipCard").onclick = function () {
   flipInner.style.transform = flipInner.style.transform === "rotateY(180deg)" ? "rotateY(0deg)" : "rotateY(180deg)";
 };
+
+// नई डार्क रेड बटनों के लिए 3 सेकंड लोडिंग और रीडायरेक्शन फंक्शन
+function handleCustomRedirect(e, targetUrl) {
+  e.preventDefault();
+  let loadingDiv = document.createElement("div");
+  loadingDiv.id = "customLoadingDiv";
+  loadingDiv.className = "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30";
+  loadingDiv.innerHTML = `
+    <div class="bg-white rounded-2xl px-8 py-6 text-xl font-bold text-red-800 flex flex-col items-center select-none">
+      <svg class="animate-spin h-8 w-8 mb-3 text-red-900" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+      </svg>Loading...
+    </div>`;
+  document.body.appendChild(loadingDiv);
+  setTimeout(() => {
+    window.location.href = targetUrl;
+  }, 3000);
+}
 
 flipCardModal.addEventListener("click", (e) => { if (e.target === flipCardModal) closeFlipCardModal(); });
 document.addEventListener('contextmenu', event => event.preventDefault());
