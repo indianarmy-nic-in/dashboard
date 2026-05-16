@@ -1,677 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IAFZ - Indian Armed Forces</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- iPhone Full Screen App -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Status Bar Style -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- App Name -->
+  <meta name="apple-mobile-web-app-title" content="IAFZ">
+  <!-- Android Theme Color -->
+  <meta name="theme-color" content="#000000">
 
-<title>IAFZ</title>
+  <!-- Apple Touch Icon (iOS Homescreen) -->
+  <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s180/Untitled%20design.jpeg">
 
-<!-- iPhone Full Screen App -->
-<meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s32/Untitled%20design.jpeg">
 
-<!-- Status Bar Style -->
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Inline Web App Manifest (100% Works on Android/Chrome Add to Homescreen) -->
+  <link rel="manifest" href='data:application/json,{"name": "IAFZ", "short_name": "IAFZ", "start_url": "./index.html", "display": "standalone", "background_color": "#000000", "theme_color": "#000000", "orientation": "portrait", "icons": [{"src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s192/Untitled%20design.jpeg", "sizes": "192x192", "type": "image/jpeg", "purpose": "any maskable"}, {"src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s512/Untitled%20design.jpeg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any maskable"}]}'>
 
-<!-- App Name -->
-<meta name="apple-mobile-web-app-title" content="IAFZ">
+  <!-- External Scripts and Styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-<!-- Android Theme -->
-<meta name="theme-color" content="#000000">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    :root { --soft: #f4f6f9; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      overscroll-behavior-y: none; 
+      width: 100%;
+      background: #000;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--soft);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-touch-callout: none;
+    }
+    body, img {
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+    #flipCard { perspective: 1200px; }
+    #flipInner {
+      transform-style: preserve-3d;
+      transition: transform 0.7s;
+      cursor: pointer;
+    }
+    #flipFront, #flipBack {
+      backface-visibility: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+    }
+    #flipBack { transform: rotateY(180deg); }
+    .max-h-0 { max-height: 0; overflow: hidden; }
+    .transition-max-height { transition: max-height 0.4s ease; }
 
-<!-- App Icon -->
-<link class="apple-touch-icon" sizes="180x180" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg">
+    .top-mask-zone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background-color: #ffffff; 
+      z-index: 105;
+    }
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg">
+    .perfect-fixed-header {
+      position: fixed;
+      top: 50px; 
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.15), 0 2px 8px -1px rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    }
 
-<!-- Manifest -->
-<link rel="manifest" href="manifest.json">
+    .bottom-tricolor-stripe {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      height: 12px; 
+      width: 100%;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+    }
 
-<!-- Manifest Inline -->
-<script>
-const manifestData = {
-    "name": "IAFZ",
-    "short_name": "IAFZ",
-    "start_url": "./",
-    "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#000000",
-    "orientation": "portrait",
-    "icons": [
-        {
-            "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s768/Untitled%20design.jpeg",
-            "sizes": "180x180",
-            "type": "image/png"
-        }
-    ]
-};
+    @keyframes customPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    .animate-btn {
+      animation: customPulse 3s infinite ease-in-out;
+    }
+    .animate-btn:nth-child(2) { animation-delay: 0.5s; }
+    .animate-btn:nth-child(3) { animation-delay: 1s; }
 
-const manifestBlob = new Blob(
-    [JSON.stringify(manifestData)],
-    {type: 'application/json'}
-);
-
-const manifestURL = URL.createObjectURL(manifestBlob);
-
-document.querySelector('link[rel="manifest"]')
-.setAttribute('href', manifestURL);
-</script>
-
-<style>
-
-body, html{
-    margin:0;
-    padding:0;
-    width:100%;
-    background:#000;
-    font-family:sans-serif;
-    overscroll-behavior-y: none; /* यह ऊपर की तरफ एक्स्ट्रा बाउंसिंग स्क्रॉलिंग रोकता है */
-}
-
-/* Demo Fullscreen App */
-.app-container{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    font-size:28px;
-    font-weight:bold;
-}
-
-</style>
-
+    .animate-red-btn {
+      animation: customPulse 3s infinite ease-in-out;
+    }
+    .animate-red-btn:nth-child(1) { animation-delay: 0.2s; }
+    .animate-red-btn:nth-child(2) { animation-delay: 0.7s; }
+    .animate-red-btn:nth-child(3) { animation-delay: 1.2s; }
+  </style>
 </head>
 
-<body>
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Indian Armed Forces</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/feather-icons"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-:root { --soft: #f4f6f9; }
-html, body {
-  margin: 0;
-  padding: 0;
-  overscroll-behavior-y: none; 
-}
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--soft);
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-touch-callout: none;
-}
-body, img {
-  -webkit-user-drag: none;
-  user-drag: none;
-}
-img {
-  -webkit-user-drag: none;
-  user-drag: none;
-}
-#flipCard { perspective: 1200px; }
-#flipInner {
-  transform-style: preserve-3d;
-  transition: transform 0.7s;
-  cursor: pointer;
-}
-#flipFront, #flipBack {
-  backface-visibility: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-              0 4px 6px -2px rgb(0 0 0 / 0.05);
-}
-#flipBack { transform: rotateY(180deg); }
-.max-h-0 { max-height: 0; overflow: hidden; }
-.transition-max-height { transition: max-height 0.4s ease; }
-
-/* 0 से 50px का सॉलिड सफ़ेद मास्क - उच्चतम z-index के साथ ताकि कंटेंट 100% छुप जाए */
-.top-mask-zone {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  background-color: #ffffff; 
-  z-index: 105; /* इसे सबसे ऊपर रखा है ताकि कंटेंट इसके पीछे पूरी तरह लॉक हो जाए */
-}
-
-/* 50px की दूरी पर लॉक्ड हेडर */
-.perfect-fixed-header {
-  position: fixed;
-  top: 50px; 
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.15), 0 2px 8px -1px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
-}
-
-/* हमेशा नीचे लॉक रहने वाली त्रिरंगा स्ट्राइक */
-.bottom-tricolor-stripe {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  height: 12px; 
-  width: 100%;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
-}
-
-/* बटन के लिए कस्टम पल्स एनिमेशन */
-@keyframes customPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-}
-.animate-btn {
-  animation: customPulse 3s infinite ease-in-out;
-}
-.animate-btn:nth-child(2) {
-  animation-delay: 0.5s;
-}
-.animate-btn:nth-child(3) {
-  animation-delay: 1s;
-}
-
-/* नई डार्क रेड बटनों के लिए एनिमेशन */
-.animate-red-btn {
-  animation: customPulse 3s infinite ease-in-out;
-}
-.animate-red-btn:nth-child(1) { animation-delay: 0.2s; }
-.animate-red-btn:nth-child(2) { animation-delay: 0.7s; }
-.animate-red-btn:nth-child(3) { animation-delay: 1.2s; }
-</style>
-</head>
 <body class="min-h-screen bg-cover bg-center"
   style="background-image: url('https://media.istockphoto.com/id/1297933144/vector/vector-illustration-of-indian-tricolor-flag-background.jpg?s=612x612&w=0&k=20&c=tCd-ZdLMNHw_KAMZTX9zStqEDdWzXlS6FYrvjrZIswk=')"
   oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
 
-<!-- ऊपर का 50px का गैप ब्लॉक करने के लिए Solid White Mask -->
-<div class="top-mask-zone"></div>
+  <!-- Solid White Mask -->
+  <div class="top-mask-zone"></div>
 
-<!-- 3D इफ़ेक्ट के साथ पूरी तरह से लॉक्ड TOP हेडर (जो 50px पर है) -->
-<div class="perfect-fixed-header pb-4 pt-4 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-6xl mx-auto flex justify-between items-center select-none">
-    <div class="flex items-center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Armed_forces_logo.png" alt="Logo" class="h-12" draggable="false" />
-      <span class="ml-2 text-xs font-bold text-gray-600">OFFICIAL PORTAL</span>
-    </div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Ministry_of_Defence_India.svg" alt="MOD" class="h-10" draggable="false" />
-  </div>
-</div>
-
-<!-- मुख्य सामग्री अनुभाग -->
-<section id="profileScreen" class="min-h-screen bg-white pt-36 pb-16">
-  <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8 select-none">
-    
-    <div class="text-center mb-10" data-aos="fade-up">
-      <h2 class="text-xl md:text-2xl font-bold text-gray-800">Capt. Manish Chaudhary</h2>
-      <p class="text-lg text-gray-600">Yudh Seva Medal, Sena Medal, <br/>COAS Commendation</p>
-    </div>
-    
-    <!-- प्रोफ़ाइल फ़ोटो -->
-    <div class="flex justify-center mb-10" data-aos="fade-up">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCHloBHTkY8lAYNgE2CFaQOfVCH5jD9S3Y5EdnNKmLM3-n0Uv6wphxOW8ZmNw_frMef_XJ2RhyaELuYiZ7VqMQIhFJU6PdSsHUHIBWbklZZo_Qr5IX98Dk3BujZljBTAtO7PYS-5TaF8Ju36QeUfBQB-52lBDnRRNMtsTBr8gz8l4WetEL-Q9HUj6EwlO4/s523/Untitled%20design.jpeg" alt="Officer Photo" class="w-48 h-64 object-cover border-4 border-gray-200 rounded-xl shadow-md" draggable="false" />
-    </div>
-    
-    <!-- टेबल अनुभाग -->
-    <div class="overflow-x-auto mb-10" data-aos="fade-up">
-      <table class="w-full border-collapse min-w-[320px] md:min-w-auto" oncopy="return false" oncut="return false" onpaste="return false">
-        <tbody class="divide-y divide-gray-200">
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Allegiance</td>
-            <td class="py-3 px-4 flex items-center gap-2">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_India.png" alt="India Flag" class="w-5 h-3.5 object-cover rounded-sm shrink-0" />
-              <span>India</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Branch</td>
-            <td class="py-3 px-4 flex items-center gap-2">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Flag_of_Indian_Army.svg/3840px-Flag_of_Indian_Army.svg.png" alt="Army Logo" class="w-5 h-5 object-contain shrink-0" />
-              <span>Indian Army</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Years of Service</td>
-            <td class="py-3 px-4 flex items-center gap-2">
-             
-              <span>13 June 2020 – Serving</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Rank</td>
-            <td class="py-3 px-4 flex items-center gap-2">
-             
-              <span>Captain</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Service ID</td>
-            <td class="py-3 px-4 flex items-center gap-2">
-            
-              <span class="font-mono">IC-80129D</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Unit</td>
-            <td class="py-3 px-4 flex items-center gap-2">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_kBg7ICFpyOaiCtNoEp5b684JnrTVzNRsirVKcwhJyQ&s=10" alt="Unit Icon" class="w-4 h-4 object-contain shrink-0" />
-              <span>18 Dogra</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">First Posting</td>
-            <td class="py-3 px-4 flex items-center gap-2">
-            
-              <span>Platoon Commander, Delta Company, Northern Command HQ, Udhampur, Jammu & Kashmir <br/><strong>Year 2020- 2023</strong></span>
-            </td>
-          </tr>
-
-
-
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Currently Deployed</td>
-            <td class="py-3 px-4 flex items-center gap-2">
-           
-              <span>Staff Officer Grade II Operations (SO2 OPS) HQ I Corps Strike 1 Mathura U.P <br/><strong>Year 2023- Present</strong> </span>
-            </td>
-          </tr>
-
-
-   <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Conflicts </td>
-            <td class="py-3 px-4 flex items-center gap-2">
-           
-              <span>• OPS Sindoor<br/> • OPS Mahadev <br/> • OPS Jammu Drill <br/> • Counter-Insurgency OPS<br/> • POK Border OPS  </span>
-            </td>
-          </tr>
-
-
-
-
-
-
-          <tr>
-            <td class="py-3 px-4 font-semibold bg-gray-100">Awards</td>
-            <td class="py-3 px-4 flex flex-col sm:flex-row sm:items-center gap-4">
-              <span class="flex items-center gap-1.5">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Yudh_Seva_Medal_ribbon.svg/1280px-Yudh_Seva_Medal_ribbon.svg.png" alt="Sena Medal Ribbon" class="w-6 h-3.5 object-contain rounded-sm shrink-0 shadow-sm" />
-                <span>Yudh Seva Medal</span>
-              </span>
-
-
-<span class="flex items-center gap-1.5">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Sena_Medal_ribbon.svg/3840px-Sena_Medal_ribbon.svg.png" alt="Sena Medal Ribbon" class="w-6 h-3.5 object-contain rounded-sm shrink-0 shadow-sm" />
-                <span>Sena Medal</span>
-              </span>
-
-
-
-              <span class="flex items-center gap-1.5">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/COAS_Commendation_disc.png" alt="COAS Ribbon" class="w-7 h-3 object-contain rounded-sm shrink-0 shadow-sm" />
-                <span>COAS Commendation</span>
-              </span>
-            </td>
-          </tr>
-
-
-        </tbody>
-      </table>
-    </div>
-    
-    <!-- हमेशा एक लाइन में रहने वाले एनिमेटेड मूल बटन -->
-   <div class="flex flex-row justify-between items-center gap-2 max-w-4xl mx-auto mb-10 px-1" data-aos="fade-up">
-  <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #D90000;" onclick="handleCardClick(event, 'defence')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> DEFENCE ID</a>
-  <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #000080;" onclick="handleCardClick(event, 'csd')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> CSD CARD</a>
-  <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #4CC7FC;" onclick="handleCardClick(event, 'medical')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> MEDICAL CARD</a>
-</div>
-
-
-    <!-- तीन नई डार्क रेड बटनें -->
-    <div class="flex flex-row justify-between items-center gap-2 max-w-4xl mx-auto mb-10 px-1" data-aos="fade-up">
-  <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #D90000;" onclick="handleCustomRedirect(event, 'https://www.mod.gov.in/en/user/login')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i>Permission Letters</a>
-  <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #000080;" onclick="handleCustomRedirect(event, 'https://www.mod.gov.in/en/user/login')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i> Movement Orders</a>
-  <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #4CC7FC;" onclick="handleCustomRedirect(event, 'https://www.mod.gov.in/en/user/login')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i>Service Record</a>
-</div>
-
-
-    <!-- Accordion -->
-    <div class="max-w-4xl mx-auto px-4 py-6 space-y-4 select-none" data-aos="fade-up">
-      <!-- Section 1 -->
-      <div class="border rounded-lg border-gray-300">
-        <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition"
-          aria-expanded="false"
-          aria-controls="section1-content"
-          id="section1-header"
-          onclick="toggleAccordion(1)">
-          <span>Educational & Military Training Background</span>
-          <svg id="icon-1" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-        </button>
-        <div id="section1-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm" aria-labelledby="section1-header" role="region" style="max-height: 0;">
-          <ol class="list-decimal list-inside space-y-2">
-            <li><strong>National Defence Academy (NDA)</strong><br />
-              <ul class="list-disc list-inside ml-5 space-y-1">
-                <li>Course: 135th Course</li>
-                <li>Joined NDA: 2015</li>
-                <li>Passing Out Parade (POP): 30 November 2018 at Khetrapal Parade Ground, NDA Pune</li>
-                <li>Reviewing Officer: Chief of Army Staff, General Bipin Rawat</li>
-                <li>Highlights: NDA training equipped Capt. Chaudhary with a strong foundation in military science, leadership, and strategy. He excelled in academics, physical training, and leadership exercises, preparing him for operational excellence in the Indian Army.</li>
-              </ul>
-            </li>
-            <li><strong>Indian Military Academy (IMA)</strong><br />
-              <ul class="list-disc list-inside ml-5 space-y-1">
-                <li>Course: 146th Regular Course, Delta Company</li>
-                <li>Joined IMA: July 2018</li>
-                <li>Passing Out Parade (POP): 13 June 2020</li>
-                <li>Highlights: IMA provided rigorous training in tactics, operational planning, and leadership. Capt. Chaudhary successfully completed all phases, earning distinction in field exercises, leadership development, and operational readiness.</li>
-              </ul>
-            </li>
-          </ol>
-        </div>
+  <!-- FIXED TOP HEADER -->
+  <div class="perfect-fixed-header pb-4 pt-4 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto flex justify-between items-center select-none">
+      <div class="flex items-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Armed_forces_logo.png" alt="Logo" class="h-12" draggable="false" />
+        <span class="ml-2 text-xs font-bold text-gray-600">OFFICIAL PORTAL</span>
       </div>
-
-      <!-- Section 2 -->
-      <div class="border rounded-lg border-gray-300">
-        <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition"
-          aria-expanded="false"
-          aria-controls="section2-content"
-          id="section2-header"
-          onclick="toggleAccordion(2)">
-          <span>Military Career & Commissioning</span>
-          <svg id="icon-2" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-        </button>
-        <div id="section2-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm" aria-labelledby="section2-header" role="region" style="max-height: 0;">
-          <p><strong>Commission as Lieutenant</strong></p>
-          <ul class="list-disc list-inside ml-5 space-y-1">
-            <li>Date: 13 June 2020</li>
-            <li>First Posting: 18th Battalion, Dogra Infantry Regiment, Ashok Chakra Paltan, Jammu & Kashmir</li>
-            <li>Responsibilities: Operational planning, field leadership, coordination with units in sensitive operational areas.</li>
-          </ul>
-          <p class="my-3"><strong>Promotion to Captain</strong></p>
-          <ul class="list-disc list-inside ml-5 space-y-1">
-            <li>Date: 13 June 2022 (promoted by commanding officer)</li>
-            <li>Current Posting: HQ I Corps, Strike 1 Corps, Mathura, U.P</li>
-            <li>Date of Current Posting: 14 April 2023</li>
-            <li>Reporting Officer: Col Bhupendra Sharma, VSM, 12 Rajput Regiment, Col (GS), HQ 1 Corps</li>
-            <li>Key Roles: Staff Officer Grade II Operations (SO2 OPS), contributing to strategic planning, operational coordination, and policy implementation within HQ I Corps.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Section 3 -->
-      <div class="border rounded-lg border-gray-300">
-        <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition"
-          aria-expanded="false"
-          aria-controls="section3-content"
-          id="section3-header"
-          onclick="toggleAccordion(3)">
-          <span>Awards & Recognitions</span>
-          <svg id="icon-3" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-        </button>
-        <div id="section3-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm" aria-labelledby="section3-header" role="region" style="max-height: 0;">
-          <ol class="list-decimal list-inside space-y-2">
-            
-
-
-<li><strong>Yudh Seva Medal (YSM)</strong><br/>
-              Awarded the Yudh Seva Medal for distinguished service and exceptional dedication during Operation Mahadev and Operation Sindoor in service of the nation. The decoration was conferred upon Capt. Manish by the Hon’ble President of India, Droupadi Murmu, on the occasion of the Republic Day celebrations held on 26 January 2026, in recognition of his exemplary commitment, courage, and devotion to duty in the service of India.
-            </li>
-
-
-
-<li><strong>Sena Medal (SM)</strong><br/>
-              Awarded by President of India, Shri Droupadi Murmu, on 26 January 2023. Recognized for distinguished service, professional excellence, and dedication to operational duties in challenging environments.
-            </li>
-
-
-
-
-            <li><strong>COAS Commendation Badge</strong><br/>
-              Awarded by Chief of Army Staff, General Upendra Dwivedi, on 15 August 2025. Honoured for outstanding performance, exemplary commitment to duties, and significant contributions to Army operations and staff responsibilities.
-            </li>
-          </ol>
-          <p class="mt-3">
-            These awards reflect Capt. Manish dedication, courage, and professionalism, marking him as a role model among his peers.
-          </p>
-        </div>
-      </div>
-
-      <!-- Section 4 -->
-      <div class="border rounded-lg border-gray-300">
-        <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition"
-          aria-expanded="false"
-          aria-controls="section4-content"
-          id="section4-header"
-          onclick="toggleAccordion(4)">
-          <span>Professional & Ceremonial Engagements</span>
-          <svg id="icon-4" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-        </button>
-        <div id="section4-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm space-y-3" aria-labelledby="section4-header" role="region" style="max-height: 0;">
-          <div><strong>Ceremonial & Social Duties:</strong>
-            <ul class="list-disc list-inside ml-5 space-y-1">
-              <li>Participation in Army Day, Republic Day, and Guard of Honour ceremonies</li>
-              <li>Attendance at official defence, strategy, and operations conferences, meetings, and seminars</li>
-              <li>Engagement in community outreach and civic programs, including National Service Scheme (NSS), Army Public Schools, and various welfare programs</li>
-            </ul>
-          </div>
-          <div><strong>Sports & Physical Activities:</strong>
-            <ul class="list-disc list-inside ml-5 space-y-1">
-              <li>Active participation in Army Sports Events including Cricket and Football</li>
-              <li>Maintains rigorous physical training to set standards for discipline and excellence</li>
-            </ul>
-          </div>
-          <div><strong>Workshops & Seminars:</strong>
-            <ul class="list-disc list-inside ml-5 space-y-1">
-              <li>Attended multiple workshops and seminars on Leadership, Strategy, and Professional Development</li>
-              <li>Shared experiences and contributed to discussions on operational efficiency, tactical planning, and personnel management</li>
-            </ul>
-          </div>
-          <div><strong>Community & Welfare Programs:</strong>
-            <ul class="list-disc list-inside ml-5 space-y-1">
-              <li>Conducted motivational talks at Army Public Schools, inspiring students towards excellence and discipline</li>
-              <li>Coordinated with schools for academic and extracurricular development, integrating community engagement with military outreach</li>
-              <li>Actively contributed to welfare programs, enhancing the morale and well-being of local communities</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 5 -->
-      <div class="border rounded-lg border-gray-300">
-        <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition"
-          aria-expanded="false"
-          aria-controls="section5-content"
-          id="section5-header"
-          onclick="toggleAccordion(5)">
-          <span>Professional Skills & Competencies</span>
-          <svg id="icon-5" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-        </button>
-        <div id="section5-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm" aria-labelledby="section5-header" role="region" style="max-height: 0;">
-          <ul class="list-disc list-inside space-y-2">
-            <li>Operational Leadership: Planning and execution of operations, staff coordination, and strategic decision-making</li>
-            <li>Ceremonial Expertise: Commanding parades, organising official ceremonies, and upholding Army traditions</li>
-            <li>Community Engagement: Strong commitment to education, welfare programs, and motivational outreach</li>
-            <li>Sports & Physical Excellence: Active role in Army sports, promoting teamwork, fitness, and discipline</li>
-            <li>Strategic Planning & Administration: Experienced in operational planning at HQ level, coordinating multiple units and departments</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Footer Section -->
-    <div class="flex flex-col items-center justify-center bg-red-600 text-white p-4 rounded-lg text-center text-sm mt-10 gap-2">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/1920px-Emblem_of_India.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" alt="National Emblem" class="h-8 w-auto filter brightness-0 invert" draggable="false" />
-      <div>2026, Ministry of Defence, Government of India</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Ministry_of_Defence_India.svg" alt="MOD" class="h-10" draggable="false" />
     </div>
   </div>
-</section>
 
-<!-- पूरी तरह लॉक नीचे की त्रिरंगा स्ट्राइक -->
-<div class="bottom-tricolor-stripe">
-  <div class="flex-1 bg-[#D90000]"></div> 
-  <div class="flex-1 bg-[#000080]"></div> 
-  <div class="flex-1 bg-[#4CC7FC]"></div> 
-</div>
+  <!-- MAIN CONTENT SECTION -->
+  <section id="profileScreen" class="min-h-screen bg-white pt-36 pb-16">
+    <div class="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8 select-none">
+      
+      <div class="text-center mb-10" data-aos="fade-up">
+        <h2 class="text-xl md:text-2xl font-bold text-gray-800">Capt. Manish Chaudhary</h2>
+        <p class="text-lg text-gray-600">Yudh Seva Medal, Sena Medal, <br/>COAS Commendation</p>
+      </div>
+      
+      <!-- Officer Photo -->
+      <div class="flex justify-center mb-10" data-aos="fade-up">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCHloBHTkY8lAYNgE2CFaQOfVCH5jD9S3Y5EdnNKmLM3-n0Uv6wphxOW8ZmNw_frMef_XJ2RhyaELuYiZ7VqMQIhFJU6PdSsHUHIBWbklZZo_Qr5IX98Dk3BujZljBTAtO7PYS-5TaF8Ju36QeUfBQB-52lBDnRRNMtsTBr8gz8l4WetEL-Q9HUj6EwlO4/s523/Untitled%20design.jpeg" alt="Officer Photo" class="w-48 h-64 object-cover border-4 border-gray-200 rounded-xl shadow-md" draggable="false" />
+      </div>
+      
+      <!-- Table Details -->
+      <div class="overflow-x-auto mb-10" data-aos="fade-up">
+        <table class="w-full border-collapse min-w-[320px] md:min-w-auto" oncopy="return false" oncut="return false" onpaste="return false">
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Allegiance</td>
+              <td class="py-3 px-4 flex items-center gap-2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_India.png" alt="India Flag" class="w-5 h-3.5 object-cover rounded-sm shrink-0" />
+                <span>India</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Branch</td>
+              <td class="py-3 px-4 flex items-center gap-2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Flag_of_Indian_Army.svg/3840px-Flag_of_Indian_Army.svg.png" alt="Army Logo" class="w-5 h-5 object-contain shrink-0" />
+                <span>Indian Army</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Years of Service</td>
+              <td class="py-3 px-4 flex items-center gap-2"><span>13 June 2020 – Serving</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Rank</td>
+              <td class="py-3 px-4 flex items-center gap-2"><span>Captain</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Service ID</td>
+              <td class="py-3 px-4 flex items-center gap-2"><span class="font-mono">IC-80129D</span></td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Unit</td>
+              <td class="py-3 px-4 flex items-center gap-2">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_kBg7ICFpyOaiCtNoEp5b684JnrTVzNRsirVKcwhJyQ&s=10" alt="Unit Icon" class="w-4 h-4 object-contain shrink-0" />
+                <span>18 Dogra</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">First Posting</td>
+              <td class="py-3 px-4 flex items-center gap-2">
+                <span>Platoon Commander, Delta Company, Northern Command HQ, Udhampur, Jammu & Kashmir <br/><strong>Year 2020- 2023</strong></span>
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Currently Deployed</td>
+              <td class="py-3 px-4 flex items-center gap-2">
+                <span>Staff Officer Grade II Operations (SO2 OPS) HQ I Corps Strike 1 Mathura U.P <br/><strong>Year 2023- Present</strong> </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Conflicts</td>
+              <td class="py-3 px-4 flex items-center gap-2">
+                <span>• OPS Sindoor<br/> • OPS Mahadev <br/> • OPS Jammu Drill <br/> • Counter-Insurgency OPS<br/> • POK Border OPS  </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold bg-gray-100">Awards</td>
+              <td class="py-3 px-4 flex flex-col sm:flex-row sm:items-center gap-4">
+                <span class="flex items-center gap-1.5">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Yudh_Seva_Medal_ribbon.svg/1280px-Yudh_Seva_Medal_ribbon.svg.png" alt="Sena Medal Ribbon" class="w-6 h-3.5 object-contain rounded-sm shrink-0 shadow-sm" />
+                  <span>Yudh Seva Medal</span>
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Sena_Medal_ribbon.svg/3840px-Sena_Medal_ribbon.svg.png" alt="Sena Medal Ribbon" class="w-6 h-3.5 object-contain rounded-sm shrink-0 shadow-sm" />
+                  <span>Sena Medal</span>
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/COAS_Commendation_disc.png" alt="COAS Ribbon" class="w-7 h-3 object-contain rounded-sm shrink-0 shadow-sm" />
+                  <span>COAS Commendation</span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Card Buttons Row -->
+      <div class="flex flex-row justify-between items-center gap-2 max-w-4xl mx-auto mb-10 px-1" data-aos="fade-up">
+        <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #D90000;" onclick="handleCardClick(event, 'defence')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> DEFENCE ID</a>
+        <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #000080;" onclick="handleCardClick(event, 'csd')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> CSD CARD</a>
+        <a href="#" class="animate-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #4CC7FC;" onclick="handleCardClick(event, 'medical')"><i data-feather="credit-card" class="w-3.5 h-3.5 mr-1 shrink-0"></i> MEDICAL CARD</a>
+      </div>
 
-<!-- Flip Card Modal -->
-<div id="flipCardModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
-  <div class="bg-transparent flex flex-col items-center max-w-xs mx-4 sm:max-w-md" oncontextmenu="return false;">
-    <div id="flipCard" class="w-72 h-44 relative mb-6 rounded-xl">
-      <div id="flipInner" class="relative w-full h-full">
-        <div id="flipFront" class="absolute top-0 left-0 bg-white rounded-xl flex items-center justify-center border-4 border-blue-500">
-          <img id="frontImage" src="" alt="Front side of card" class="w-72 h-44 rounded-xl object-contain select-none" draggable="false" />
+      <!-- Custom Redirect Buttons Row -->
+      <div class="flex flex-row justify-between items-center gap-2 max-w-4xl mx-auto mb-10 px-1" data-aos="fade-up">
+        <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #D90000;" onclick="handleCustomRedirect(event, 'https://www.mod.gov.in/en/user/login')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i>Permission Letters</a>
+        <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #000080;" onclick="handleCustomRedirect(event, 'https://www.mod.gov.in/en/user/login')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i> Movement Orders</a>
+        <a href="#" class="animate-red-btn flex-1 text-white py-2.5 rounded text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-md" style="background-color: #4CC7FC;" onclick="handleCustomRedirect(event, 'https://www.mod.gov.in/en/user/login')"><i data-feather="file-text" class="w-3.5 h-3.5 mr-1 shrink-0"></i>Service Record</a>
+      </div>
+
+      <!-- Accordions -->
+      <div class="max-w-4xl mx-auto px-4 py-6 space-y-4 select-none" data-aos="fade-up">
+        <!-- Section 1 -->
+        <div class="border rounded-lg border-gray-300">
+          <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition" aria-expanded="false" aria-controls="section1-content" id="section1-header" onclick="toggleAccordion(1)">
+            <span>Educational & Military Training Background</span>
+            <svg id="icon-1" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </button>
+          <div id="section1-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm" aria-labelledby="section1-header" role="region">
+            <ol class="list-decimal list-inside space-y-2">
+              <li><strong>National Defence Academy (NDA)</strong><br />
+                <ul class="list-disc list-inside ml-5 space-y-1">
+                  <li>Course: 135th Course</li>
+                  <li>Joined NDA: 2015</li>
+                  <li>Passing Out Parade (POP): 30 November 2018 at Khetrapal Parade Ground, NDA Pune</li>
+                  <li>Reviewing Officer: Chief of Army Staff, General Bipin Rawat</li>
+                  <li>Highlights: NDA training equipped Capt. Chaudhary with a strong foundation in military science, leadership, and strategy.</li>
+                </ul>
+              </li>
+              <li><strong>Indian Military Academy (IMA)</strong><br />
+                <ul class="list-disc list-inside ml-5 space-y-1">
+                  <li>Course: 146th Regular Course, Delta Company</li>
+                  <li>Joined IMA: July 2018</li>
+                  <li>Passing Out Parade (POP): 13 June 2020</li>
+                  <li>Highlights: IMA provided rigorous training in tactics, operational planning, and leadership.</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
         </div>
-        <div id="flipBack" class="absolute top-0 left-0 bg-white rounded-xl flex items-center justify-center border-4 border-blue-700" style="transform: rotateY(180deg)">
-          <img id="backImage" src="" alt="Back side of card" class="w-72 h-44 rounded-xl object-contain select-none" draggable="false" />
+
+        <!-- Section 2 -->
+        <div class="border rounded-lg border-gray-300">
+          <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition" aria-expanded="false" aria-controls="section2-content" id="section2-header" onclick="toggleAccordion(2)">
+            <span>Military Career & Commissioning</span>
+            <svg id="icon-2" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </button>
+          <div id="section2-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm" aria-labelledby="section2-header" role="region">
+            <p><strong>Commission as Lieutenant</strong></p>
+            <ul class="list-disc list-inside ml-5 space-y-1">
+              <li>Date: 13 June 2020</li>
+              <li>First Posting: 18th Battalion, Dogra Infantry Regiment, Ashok Chakra Paltan, Jammu & Kashmir</li>
+            </ul>
+            <p class="my-3"><strong>Promotion to Captain</strong></p>
+            <ul class="list-disc list-inside ml-5 space-y-1">
+              <li>Date: 13 June 2022</li>
+              <li>Current Posting: HQ I Corps, Strike 1 Corps, Mathura, U.P</li>
+              <li>Key Roles: Staff Officer Grade II Operations (SO2 OPS).</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="border rounded-lg border-gray-300">
+          <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition" aria-expanded="false" aria-controls="section3-content" id="section3-header" onclick="toggleAccordion(3)">
+            <span>Awards & Recognitions</span>
+            <svg id="icon-3" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </button>
+          <div id="section3-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm" aria-labelledby="section3-header" role="region">
+            <ol class="list-decimal list-inside space-y-2">
+              <li><strong>Yudh Seva Medal (YSM)</strong><br/>Conferred by the Hon’ble President of India, Droupadi Murmu, on 26 January 2026.</li>
+              <li><strong>Sena Medal (SM)</strong><br/>Awarded on 26 January 2023 for distinguished service.</li>
+              <li><strong>COAS Commendation Badge</strong><br/>Awarded by General Upendra Dwivedi on 15 August 2025.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="border rounded-lg border-gray-300">
+          <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition" aria-expanded="false" aria-controls="section4-content" id="section4-header" onclick="toggleAccordion(4)">
+            <span>Professional & Ceremonial Engagements</span>
+            <svg id="icon-4" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </button>
+          <div id="section4-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm space-y-3" aria-labelledby="section4-header" role="region">
+            <div><strong>Ceremonial Duties:</strong> Parades, Official Conferences, and Outreach.</div>
+          </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="border rounded-lg border-gray-300">
+          <button class="w-full flex justify-between items-center px-6 py-4 font-semibold text-left text-gray-800 hover:bg-gray-50 transition" aria-expanded="false" aria-controls="section5-content" id="section5-header" onclick="toggleAccordion(5)">
+            <span>Professional Skills & Competencies</span>
+            <svg id="icon-5" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          </button>
+          <div id="section5-content" class="max-h-0 transition-max-height px-6 pb-6 text-gray-700 text-sm" aria-labelledby="section5-header" role="region">
+            <ul class="list-disc list-inside space-y-2">
+              <li>Operational Leadership, Strategic Planning, and Administration.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="flex flex-col items-center justify-center bg-red-600 text-white p-4 rounded-lg text-center text-sm mt-10 gap-2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/1920px-Emblem_of_India.svg.png" alt="National Emblem" class="h-8 w-auto filter brightness-0 invert" draggable="false" />
+        <div>2026, Ministry of Defence, Government of India</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tricolor bottom stripe -->
+  <div class="bottom-tricolor-stripe">
+    <div class="flex-1 bg-[#D90000]"></div> 
+    <div class="flex-1 bg-[#000080]"></div> 
+    <div class="flex-1 bg-[#4CC7FC]"></div> 
+  </div>
+
+  <!-- Flip Card Modal -->
+  <div id="flipCardModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
+    <div class="bg-transparent flex flex-col items-center max-w-xs mx-4 sm:max-w-md" oncontextmenu="return false;">
+      <div id="flipCard" class="w-72 h-44 relative mb-6 rounded-xl">
+        <div id="flipInner" class="relative w-full h-full">
+          <div id="flipFront" class="absolute top-0 left-0 bg-white rounded-xl flex items-center justify-center border-4 border-blue-500">
+            <img id="frontImage" src="" alt="Front" class="w-72 h-44 rounded-xl object-contain select-none" draggable="false" />
+          </div>
+          <div id="flipBack" class="absolute top-0 left-0 bg-white rounded-xl flex items-center justify-center border-4 border-blue-700">
+            <img id="backImage" src="" alt="Back" class="w-72 h-44 rounded-xl object-contain select-none" draggable="false" />
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-feather.replace();
-AOS.init({ once: true });
+  <script>
+    feather.replace();
+    AOS.init({ once: true });
 
-function toggleAccordion(index) {
-  const content = document.getElementById(`section${index}-content`);
-  const icon = document.getElementById(`icon-${index}`);
-  const isExpanded = content.style.maxHeight && content.style.maxHeight !== "0px";
-  const plusSVG = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />`;
-  const minusSVG = `<path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />`;
-  if (isExpanded) {
-    content.style.maxHeight = '0';
-    icon.style.transform = 'rotate(0deg)';
-    icon.innerHTML = plusSVG;
-    icon.parentNode.setAttribute('aria-expanded', 'false');
-  } else {
-    closeAllExcept(index);
-    content.style.maxHeight = content.scrollHeight + "px";
-    icon.style.transform = 'rotate(90deg)';
-    icon.innerHTML = minusSVG;
-    icon.parentNode.setAttribute('aria-expanded', 'true');
-  }
-}
-function closeAllExcept(openIndex) {
-  for(let i=1; i<=5; i++) {
-    if(i !== openIndex) {
-      const content = document.getElementById(`section${i}-content`);
-      const icon = document.getElementById(`icon-${i}`);
-      if(content && icon) {
+    function toggleAccordion(index) {
+      const content = document.getElementById(`section${index}-content`);
+      const icon = document.getElementById(`icon-${index}`);
+      const isExpanded = content.style.maxHeight && content.style.maxHeight !== "0px";
+      if (isExpanded) {
         content.style.maxHeight = '0';
         icon.style.transform = 'rotate(0deg)';
         icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />`;
-        icon.parentNode.setAttribute('aria-expanded', 'false');
+      } else {
+        closeAllExcept(index);
+        content.style.maxHeight = content.scrollHeight + "px";
+        icon.style.transform = 'rotate(90deg)';
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />`;
       }
     }
-  }
-}
 
-const flipCardModal = document.getElementById("flipCardModal");
-const flipInner = document.getElementById("flipInner");
-const frontImage = document.getElementById("frontImage");
-const backImage = document.getElementById("backImage");
-const cardImages = {
-  defence: {
-    front: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpBW4eRg4MH1d-Tk1Z02s6V8XWJijJaVF2fKuHkUBJF1BOGpf2HaK8zUCq9fsGpRixt2PSrHCjA_F2Sm9uhShFN8MCXKgx1oN7f3kVvBOLp-IQ4gPgh1wFrg_t0zFCIhRMKKeIrQkW_IwEsfv8_fP-0hGI3zMf3IiK78PG6hydB8BLxKH888vohHddxy1M/s1588/IMG_5797.jpeg",
-    back: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdxOJB__mouwvqOKTSRKiHfB1X4tVAcTSOWlkMo2PIb4u97GPDWdCT8qdzb237VECJgUUIakgkLVg9uvdL9VOuYUhqfUDXK58y7qiiDO0YgobqleFJDXMqBbV-R6G37yE_8NeSkVT5XBhrQW-nicn-tiHYzcHI-GD8MgFiYiVqmVx_uXt6LRaO1_XUhyphenhyphenNI/s1588/IMG_5798.jpeg",
-  },
-  csd: {
-    front: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAVH_PBkkNGf5WPJ-m76cuw9Ww-skMaO-ubHGH1Ub-ACgp8HSL-2d_8SJtlwYgp-uQl078kdVtVX95Wb1jMEuGfKzn2C2E3RbtSbXXrOWW9OgiVLP8qQto1lfIRwgq3Pen7BDyqeL8kdrZ9o7GTzTJZrjp_Je9v6Chh0NM4vMTuW8BoLv5MnJEtEBW4RlH/s16000/कैन्टीन%20स्मार्ट%20कार्ड.jpeg",
-    back: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfJrwzC6y0IyEMMgCEVis0SD2YwjvrBEnQz1ImHlxcEEMjz_a5oiglnM_crrXQgtAV9P3quHnd1AyFB3HY2tteH0auvXREgu6FM0zTvi8dSTM5oeMmIo1SkRNAg5b948wC9981Qbsz64F4tscTqjeQPCH5-MyFEQHIW2MBQ-_kVKgDCsu1pmPiq0WDn-Za/s3200/IMG_5802.jpeg",
-  },
-  medical: {
-    front: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQTdmiW4Rt5bs18qmJ9K_N6Jj0ObftuOXwbWqOq4dKitqPPtdLR3dQFUxPpyaeu8dbyD5St_NvWnA1Dcl6UyHA8NhwDZSV4R5v5Yr9KAWEIJTBq_zCUgMIjJjX8pYeMGi32UzhlWvz7gYkG8-3kckxF2XOqSUK0sSoORGGclWphUgOY15tl4glAIbkqa4L/s3200/IMG_5799.jpeg",
-    back: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCd5ogDiBC-tscUXggAX0JNk7hHpjcVy-I5qphTwV4q_QCsIJwMYdEF-btV9QmRBOZQLtrNoe-9H8pGEYBOfwXaNaJ4cGGAXB8aPz09fEfGqGnpvAMHg1cc4QznMraIZwpNrV3aG4p4Q-8u3wNk4y2PUP4sdA929khlWQ_-w0HXHMVN-cm-SRPfRbIlYSI/s3200/IMG_5800.jpeg",
-  },
-};
+    function closeAllExcept(openIndex) {
+      for(let i=1; i<=5; i++) {
+        if(i !== openIndex) {
+          const content = document.getElementById(`section${i}-content`);
+          const icon = document.getElementById(`icon-${i}`);
+          if(content && icon) {
+            content.style.maxHeight = '0';
+            icon.style.transform = 'rotate(0deg)';
+            icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />`;
+          }
+        }
+      }
+    }
 
-function handleCardClick(e, type) {
-  e.preventDefault();
-  showLoadingAndFlipCard(type);
-}
+    const flipCardModal = document.getElementById("flipCardModal");
+    const flipInner = document.getElementById("flipInner");
+    const frontImage = document.getElementById("frontImage");
+    const backImage = document.getElementById("backImage");
+    const cardImages = {
+      defence: {
+        front: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpBW4eRg4MH1d-Tk1Z02s6V8XWJijJaVF2fKuHkUBJF1BOGpf2HaK8zUCq9fsGpRixt2PSrHCjA_F2Sm9uhShFN8MCXKgx1oN7f3kVvBOLp-IQ4gPgh1wFrg_t0zFCIhRMKKeIrQkW_IwEsfv8_fP-0hGI3zMf3IiK78PG6hydB8BLxKH888vohHddxy1M/s1588/IMG_5797.jpeg",
+        back: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdxOJB__mouwvqOKTSRKiHfB1X4tVAcTSOWlkMo2PIb4u97GPDWdCT8qdzb237VECJgUUIakgkLVg9uvdL9VOuYUhqfUDXK58y7qiiDO0YgobqleFJDXMqBbV-R6G37yE_8NeSkVT5XBhrQW-nicn-tiHYzcHI-GD8MgFiYiVqmVx_uXt6LRaO1_XUhyphenhyphenNI/s1588/IMG_5798.jpeg",
+      },
+      csd: {
+ front: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAVH_PBkkNGf5WPJ-m76cuw9Ww-skMaO-ubHGH1Ub-ACgp8HSL-2d_8SJtlwYgp-uQl078kdVtVX95Wb1jMEuGfKzn2C2E3RbtSbXXrOWW9OgiVLP8qQto1lfIRwgq3Pen7BDyqeL8kdrZ9o7GTzTJZrjp_Je9v6Chh0NM4vMTuW8BoLv5MnJEtEBW4RlH/s16000/कैन्टीन%20स्मार्ट%20कार्ड.jpeg",
+        back: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfJrwzC6y0IyEMMgCEVis0SD2YwjvrBEnQz1ImHlxcEEMjz_a5oiglnM_crrXQgtAV9P3quHnd1AyFB3HY2tteH0auvXREgu6FM0zTvi8dSTM5oeMmIo1SkRNAg5b948wC9981Qbsz64F4tscTqjeQPCH5-MyFEQHIW2MBQ-_kVKgDCsu1pmPiq0WDn-Za/s3200/IMG_5802.jpeg",
+      },
+      medical: {
+        front: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQTdmiW4Rt5bs18qmJ9K_N6Jj0ObftuOXwbWqOq4dKitqPPtdLR3dQFUxPpyaeu8dbyD5St_NvWnA1Dcl6UyHA8NhwDZSV4R5v5Yr9KAWEIJTBq_zCUgMIjJjX8pYeMGi32UzhlWvz7gYkG8-3kckxF2XOqSUK0sSoORGGclWphUgOY15tl4glAIbkqa4L/s3200/IMG_5799.jpeg",
+        back: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCd5ogDiBC-tscUXggAX0JNk7hHpjcVy-I5qphTwV4q_QCsIJwMYdEF-btV9QmRBOZQLtrNoe-9H8pGEYBOfwXaNaJ4cGGAXB8aPz09fEfGqGnpvAMHg1cc4QznMraIZwpNrV3aG4p4Q-8u3wNk4y2PUP4sdA929khlWQ_-w0HXHMVN-cm-SRPfRbIlYSI/s3200/IMG_5800.jpeg",
+      },
+    };
 
-function showLoadingAndFlipCard(type) {
-  let loadingDiv = document.createElement("div");
-  loadingDiv.id = "cardLoadingDiv";
-  loadingDiv.className = "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30";
-  loadingDiv.innerHTML = `
-    <div class="bg-white rounded-2xl px-8 py-6 text-xl font-bold text-blue-700 flex flex-col items-center select-none">
-      <svg class="animate-spin h-8 w-8 mb-3 text-blue-800" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-      </svgLoading...
-    </div>`;
-  document.body.appendChild(loadingDiv);
-  setTimeout(() => {
-    document.body.removeChild(loadingDiv);
-    openFlipCardModal(type);
-  }, 3000);
-}
+    function handleCardClick(e, type) {
+      e.preventDefault();
+      let loadingDiv = document.createElement("div");
+      loadingDiv.id = "cardLoadingDiv";
+      loadingDiv.className = "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30";
+      loadingDiv.innerHTML = `
+        <div class="bg-white rounded-2xl px-8 py-6 text-xl font-bold text-blue-700 flex flex-col items-center select-none">
+          <svg class="animate-spin h-8 w-8 mb-3 text-blue-800" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>Loading...
+        </div>`;
+      document.body.appendChild(loadingDiv);
+      setTimeout(() => {
+        document.body.removeChild(loadingDiv);
+        frontImage.src = cardImages[type].front;
+        backImage.src = cardImages[type].back;
+        flipInner.style.transform = "rotateY(0deg)";
+        flipCardModal.classList.remove("hidden");
+      }, 3000);
+    }
 
-function openFlipCardModal(type) {
-  frontImage.src = cardImages[type].front;
-  backImage.src = cardImages[type].back;
-  flipInner.style.transform = "rotateY(0deg)";
-  flipCardModal.classList.remove("hidden");
-}
+    document.getElementById("flipCard").onclick = function () {
+      this.children[0].style.transform = this.children[0].style.transform === "rotateY(180deg)" ? "rotateY(0deg)" : "rotateY(180deg)";
+    };
 
-function closeFlipCardModal() {
-  flipCardModal.classList.add("hidden");
-}
+    function handleCustomRedirect(e, targetUrl) {
+      e.preventDefault();
+      let loadingDiv = document.createElement("div");
+      loadingDiv.className = "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30";
+      loadingDiv.innerHTML = `
+        <div class="bg-white rounded-2xl px-8 py-6 text-xl font-bold text-red-800 flex flex-col items-center select-none">
+          <svg class="animate-spin h-8 w-8 mb-3 text-red-900" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>Loading...
+        </div>`;
+      document.body.appendChild(loadingDiv);
+      setTimeout(() => { window.location.href = targetUrl; }, 3000);
+    }
 
-document.getElementById("flipCard").onclick = function () {
-  flipInner.style.transform = flipInner.style.transform === "rotateY(180deg)" ? "rotateY(0deg)" : "rotateY(180deg)";
-};
-
-function handleCustomRedirect(e, targetUrl) {
-  e.preventDefault();
-  let loadingDiv = document.createElement("div");
-  loadingDiv.id = "customLoadingDiv";
-  loadingDiv.className = "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30";
-  loadingDiv.innerHTML = `
-    <div class="bg-white rounded-2xl px-8 py-6 text-xl font-bold text-red-800 flex flex-col items-center select-none">
-      <svg class="animate-spin h-8 w-8 mb-3 text-red-900" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-      </svgLoading...
-    </div>`;
-  document.body.appendChild(loadingDiv);
-  setTimeout(() => {
-    window.location.href = targetUrl;
-  }, 3000);
-}
-
-flipCardModal.addEventListener("click", (e) => { if (e.target === flipCardModal) closeFlipCardModal(); });
-document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
+    flipCardModal.addEventListener("click", (e) => { if (e.target === flipCardModal) flipCardModal.classList.add("hidden"); });
+  </script>
 </body>
 </html>
