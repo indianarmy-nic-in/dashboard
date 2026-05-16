@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>IAFZ - Indian Armed Forces</title>
 
-  <!-- iPhone Full Screen App (URL Hide करने के लिए) -->
+  <!-- iPhone Full Screen App (URL Hide करने के लिए सबसे महत्वपूर्ण) -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <!-- Status Bar Style -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Status Bar Style (black रखने से iOS पर URL स्पेस पूरी तरह छुप जाता है) -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <!-- App Name -->
   <meta name="apple-mobile-web-app-title" content="IAFZ">
   <!-- Android Theme Color -->
@@ -18,12 +18,12 @@
   <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s180/Untitled%20design.jpeg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s32/Untitled%20design.jpeg">
+  <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1Pages/s32/Untitled%20design.jpeg">
 
-  <!-- Inline Web App Manifest עם standalone मोड (URL Bar छुपाने के लिए) -->
-  <link rel="manifest" href='data:application/json,{"name": "IAFZ", "short_name": "IAFZ", "start_url": ".", "display": "standalone", "background_color": "#000000", "theme_color": "#000000", "orientation": "portrait", "icons": [{"src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s192/Untitled%20design.jpeg", "sizes": "192x192", "type": "image/jpeg", "purpose": "any maskable"}, {"src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s512/Untitled%20design.jpeg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any maskable"}]}'>
+  <!-- Fixed Web App Manifest with full standalone and display override properties -->
+  <link rel="manifest" href='data:application/json,{"name": "IAFZ", "short_name": "IAFZ", "start_url": "./", "scope": "./", "display": "standalone", "display_override": ["fullscreen", "standalone"], "background_color": "#000000", "theme_color": "#000000", "orientation": "portrait", "icons": [{"src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s192/Untitled%20design.jpeg", "sizes": "192x192", "type": "image/jpeg", "purpose": "any maskable"}, {"src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIghnd81b4IV_bCotk87s2-47fScJBJLe3NjpD2sQmst1Efhh04vR6P6TmZde2BSYc6_TJ1fNdrb7Yc4osE3VsEMghyDYEyXKDUKJQZo8vv71iH6wpaFAnop99Yv4k50u9xRMqQucYLqtKZ1PY0qD4EG2HtMMaI44II9S-kopaVutf4XTGRX4zNq6Aichc/s512/Untitled%20design.jpeg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any maskable"}]}'>
 
-  <!-- Service Worker Registration (URL Bar को गायब करने के लिए यह सबसे महत्वपूर्ण है) -->
+  <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
